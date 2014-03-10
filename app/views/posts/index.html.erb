@@ -1,0 +1,25 @@
+<div class="container">
+	<h1>Reddit Jr Rails Yo</h1>
+
+	<% if session[:current_user]%>
+
+	<h1>Welcome <%=User.find(session[:current_user]).username%></h1>
+	<%end%>
+
+		
+
+		<% if session[:current_user] %>
+			<%= link_to "Sign Out", session_path(session[:current_user]), :method=>:delete %>
+		<% else %>
+			<%= link_to "Sign Up", new_user_path%>
+			<%= link_to "Sign In", new_session_path%>
+		<%end%>
+	
+		<%= link_to "Create Post", new_post_path%>
+	<ul class="list-posts">
+		<% @posts.each do |post| %>
+			<li><%= link_to "#{post.title}" , post_path(post.id) %>Score: <%=post.score%></li>
+		<%end%>
+	</ul>
+
+</div>
